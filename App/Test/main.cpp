@@ -3,9 +3,9 @@
 #include <kvs/LineObject>
 #include <kvs/PointObject>
 #include <kvs/LineRenderer>
-#include "BDML.h"
+#include <Lib/BDMLData.h>
 
-void Print( const Project::BDML& bdml )
+void Print( const kvs_ext::BDMLData& bdml )
 {
     const size_t ncomponents = bdml.data.component.size();
     for ( size_t i = 0; i < ncomponents; i++ )
@@ -19,12 +19,12 @@ void Print( const Project::BDML& bdml )
     }
 }
 
-kvs::LineObject* GetLineObjectBySequence( const Project::BDML& bdml, const size_t cindex, const size_t sindex )
+kvs::LineObject* GetLineObjectBySequence( const kvs_ext::BDMLData& bdml, const size_t cindex, const size_t sindex )
 {
     kvs::LineObject* object = new kvs::LineObject();
 
-    const Project::bdml::ComponentTag& component = bdml.data.component[cindex];
-    const Project::bdml::XYZSequenceTag& sequence = component.measurement.line.xyzSequence[sindex];
+    const kvs_ext::bdml::ComponentTag& component = bdml.data.component[cindex];
+    const kvs_ext::bdml::XYZSequenceTag& sequence = component.measurement.line.xyzSequence[sindex];
     object->setCoords( sequence.xyz );
     object->setColor( kvs::RGBColor::Black() );
     object->setSize(1);
@@ -42,20 +42,20 @@ kvs::LineObject* GetLineObjectBySequence( const Project::BDML& bdml, const size_
     return object;
 }
 
-kvs::LineObject* GetLineObjectByComponent( const Project::BDML& bdml, const size_t cindex )
+kvs::LineObject* GetLineObjectByComponent( const kvs_ext::BDMLData& bdml, const size_t cindex )
 {
     kvs::LineObject* object = new kvs::LineObject();
 
     kvs::ValueArray<kvs::Real32> coords;
     std::vector<kvs::UInt32> connections;
 
-    const Project::bdml::ComponentTag& component = bdml.data.component[cindex];
+    const kvs_ext::bdml::ComponentTag& component = bdml.data.component[cindex];
     const size_t nsequences = component.measurement.line.xyzSequence.size();
     for ( size_t sindex = 0; sindex < nsequences; sindex++ )
     {
         connections.push_back( coords.size() / 3 );
 
-        const Project::bdml::XYZSequenceTag& sequence = component.measurement.line.xyzSequence[sindex];
+        const kvs_ext::bdml::XYZSequenceTag& sequence = component.measurement.line.xyzSequence[sindex];
         kvs::ValueArray<float> temp( coords.size() + sequence.xyz.size() );
         memcpy( temp.data(), coords.data(), coords.byteSize() );
         memcpy( temp.data() + coords.size(), sequence.xyz.data(), sequence.xyz.byteSize() );
@@ -82,7 +82,7 @@ kvs::LineObject* GetLineObjectByComponent( const Project::BDML& bdml, const size
     return object;
 }
 
-kvs::LineObject* GetLineObjectByTime( const Project::BDML& bdml, const float time )
+kvs::LineObject* GetLineObjectByTime( const kvs_ext::BDMLData& bdml, const float time )
 {
     kvs::LineObject* object = new kvs::LineObject();
 
@@ -92,7 +92,7 @@ kvs::LineObject* GetLineObjectByTime( const Project::BDML& bdml, const float tim
     const size_t ncomponents = bdml.data.component.size();
     for ( size_t cindex = 0; cindex < ncomponents; cindex++ )
     {
-        const Project::bdml::ComponentTag& component = bdml.data.component[cindex];
+        const kvs_ext::bdml::ComponentTag& component = bdml.data.component[cindex];
         if ( component.time == time )
         {
             const size_t nsequences = component.measurement.line.xyzSequence.size();
@@ -100,7 +100,7 @@ kvs::LineObject* GetLineObjectByTime( const Project::BDML& bdml, const float tim
             {
                 connections.push_back( coords.size() / 3 );
 
-                const Project::bdml::XYZSequenceTag& sequence = component.measurement.line.xyzSequence[sindex];
+                const kvs_ext::bdml::XYZSequenceTag& sequence = component.measurement.line.xyzSequence[sindex];
                 kvs::ValueArray<float> temp( coords.size() + sequence.xyz.size() );
                 memcpy( temp.data(), coords.data(), coords.byteSize() );
                 memcpy( temp.data() + coords.size(), sequence.xyz.data(), sequence.xyz.byteSize() );
@@ -136,7 +136,7 @@ int main( int argc, char** argv )
     kvs::glut::Screen screen( &app );
     screen.show();
 
-    Project::BDML bdml( argv[1] );
+    kvs_ext::BDMLData bdml( argv[1] );
     Print( bdml );
 
 //    screen.registerObject( GetLineObjectByComponent( bdml, 300 ) );
