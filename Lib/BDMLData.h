@@ -22,7 +22,7 @@
 #include "DataTag.h"
 
 
-namespace kvs_ext
+namespace ReadBDML
 {
 
 class BDMLData : public kvs::FileFormatBase
@@ -51,4 +51,4 @@ private:
     bool write( const std::string& filename );
 };
 
-} // end of namespace kvs_ext
+} // end of namespace ReadBDML

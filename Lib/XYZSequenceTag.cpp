@@ -18,7 +18,7 @@
 #include <vector>
 
 
-namespace kvs_ext
+namespace ReadBDML
 {
 
 namespace bdml
@@ -56,4 +56,4 @@ bool XYZSequenceTag::read( const Node* node )
 
 } // end of namespace bdml
 
-} // end of namespace kvs_ext
+} // end of namespace ReadBDML

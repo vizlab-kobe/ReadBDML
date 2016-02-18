@@ -17,7 +17,7 @@
 #include <kvs/IgnoreUnusedVariable>
 
 
-namespace kvs_ext
+namespace ReadBDML
 {
 
 BDMLData::BDMLData( const std::string& filename )
@@ -79,4 +79,4 @@ bool BDMLData::write( const std::string& filename )
     return true;
 }
 
-} // end of namespace kvs_ext
+} // end of namespace ReadBDML

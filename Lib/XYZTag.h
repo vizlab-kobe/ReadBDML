@@ -17,7 +17,7 @@
 #include "Tag.h"
 
 
-namespace kvs_ext
+namespace ReadBDML
 {
 
 namespace bdml
@@ -41,4 +41,4 @@ struct XYZTag : public Tag
 
 } // end of namespace bdml
 
-} // end of namespace kvs_ext
+} // end of namespace ReadBDML

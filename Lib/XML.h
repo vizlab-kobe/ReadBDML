@@ -21,7 +21,7 @@
 #include <kvs/Assert>
 
 
-namespace kvs_ext
+namespace ReadBDML
 {
 
 namespace bdml
@@ -81,4 +81,4 @@ inline std::string NodeValue<std::string>( const Node* node )
 
 } // end of namespace bdml
 
-} // end of namespace kvs_ext
+} // end of namespace ReadBDML

@@ -21,7 +21,7 @@
 #include <kvs/Indent>
 
 
-namespace kvs_ext
+namespace ReadBDML
 {
 
 namespace bdml
@@ -56,4 +56,4 @@ public:
 
 } // end of namespace bdml
 
-} // end of namespace kvs_ext
+} // end of namespace ReadBDML
