@@ -23,11 +23,16 @@ namespace kvs_ext
 namespace bdml
 {
 
+/*===========================================================================*/
+/**
+ *  @brief  XYZ tag class.
+ */
+/*===========================================================================*/
 struct XYZTag : public Tag
 {
-    float x;
-    float y;
-    float z;
+    float x; ///< x coordinate value
+    float y; ///< y coordinate value
+    float z; ///< z coordinate value
 
     XYZTag();
 

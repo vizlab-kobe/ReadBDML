@@ -15,6 +15,8 @@
 #pragma once
 
 #include "Tag.h"
+#include <iostream>
+#include <kvs/Indent>
 
 
 namespace kvs_ext
@@ -23,12 +25,21 @@ namespace kvs_ext
 namespace bdml
 {
 
-struct BDMLTag : public Tag
+/*===========================================================================*/
+/**
+ *  @brief  BDML tag class. Root element of the BDML file.
+ */
+/*===========================================================================*/
+class BDMLTag : public Tag
 {
-    float version;
+private:
+    float m_version; ///< BDML file version
 
+public:
     BDMLTag();
 
+    float version() const { return m_version; }
+    void print( std::ostream& os, const kvs::Indent& indent = kvs::Indent(0) ) const;
     bool read( const Node* parent );
 };
 

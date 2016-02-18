@@ -27,6 +27,16 @@ LineTag::LineTag():
 {
 }
 
+void LineTag::print( std::ostream& os, const kvs::Indent& indent ) const
+{
+    os << indent << "Number of xyz sequences: " << m_xyzSequences.size() << std::endl;
+    for ( size_t i = 0; i < m_xyzSequences.size(); i++ )
+    {
+        os << indent << "XYZ sequence[" << i << "]:" << std::endl;
+        m_xyzSequences[i].print( os, indent.nextIndent() );
+    }
+}
+
 bool LineTag::read( const Node* parent )
 {
     if ( !Tag::read( parent ) ) { return false; }
@@ -36,7 +46,7 @@ bool LineTag::read( const Node* parent )
     {
         XYZSequenceTag tag;
         tag.read( this_node );
-        xyzSequence.push_back( tag );
+        m_xyzSequences.push_back( tag );
         this_node = this->node()->IterateChildren( tag.name(), this_node );
     }
 

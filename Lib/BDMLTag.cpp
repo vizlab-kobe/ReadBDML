@@ -25,7 +25,12 @@ namespace bdml
 BDMLTag::BDMLTag():
     Tag("bdml")
 {
-    version = 0.0f;
+    m_version = 0.0f;
+}
+
+void BDMLTag::print( std::ostream& os, const kvs::Indent& indent ) const
+{
+    os << indent << "Version: " << m_version << std::endl;
 }
 
 bool BDMLTag::read( const Node* parent )
@@ -35,7 +40,7 @@ bool BDMLTag::read( const Node* parent )
     const Element* element = ToElement( Tag::node() );
     if ( element )
     {
-        version = AttributeValue<float>( element, "version" );
+        m_version = AttributeValue<float>( element, "version" );
     }
 
     return true;

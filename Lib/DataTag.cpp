@@ -26,18 +26,30 @@ DataTag::DataTag() : Tag("data")
 {
 }
 
+void DataTag::print( std::ostream& os, const kvs::Indent& indent ) const
+{
+    os << indent << "Scale unit:" << std::endl;
+    m_scale_unit.print( os, indent.nextIndent() );
+    os << indent << "Number of components: " << m_components.size() << std::endl;
+    for ( size_t i = 0; i < m_components.size(); i++ )
+    {
+        os << indent << "Component[" << i << "]:" << std::endl;
+        m_components[i].print( os, indent.nextIndent() );
+    }
+}
+
 bool DataTag::read( const Node* parent )
 {
     if ( !Tag::read( parent ) ) { return false; }
 
-    if ( !scaleUnit.read( this->node() ) ) { return false; }
+    if ( !m_scale_unit.read( this->node() ) ) { return false; }
 
     Node* this_node = FindNode( this->node(), ComponentTag().name() );
     while ( this_node )
     {
         ComponentTag tag;
         tag.read( this_node );
-        component.push_back( tag );
+        m_components.push_back( tag );
         this_node = this->node()->IterateChildren( tag.name(), this_node );
     }
 

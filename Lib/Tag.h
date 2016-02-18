@@ -24,11 +24,16 @@ namespace kvs_ext
 namespace bdml
 {
 
+/*===========================================================================*/
+/**
+ *  @brief  Tag class.
+ */
+/*===========================================================================*/
 class Tag
 {
 private:
-    std::string m_name;
-    Node* m_node;
+    std::string m_name; ///< tag name
+    Node* m_node; ///< pointer to the node
 
 public:
     explicit Tag( const std::string& name );

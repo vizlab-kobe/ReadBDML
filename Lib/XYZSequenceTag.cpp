@@ -29,6 +29,11 @@ XYZSequenceTag::XYZSequenceTag():
 {
 }
 
+void XYZSequenceTag::print( std::ostream& os, const kvs::Indent& indent ) const
+{
+    os << indent << "Number of xyz: " << m_xyz.size() / 3 << std::endl;
+}
+
 bool XYZSequenceTag::read( const Node* node )
 {
     std::vector<float> data;
@@ -44,7 +49,7 @@ bool XYZSequenceTag::read( const Node* node )
         this_node = this->node()->IterateChildren( tag.name(), this_node );
     }
 
-    xyz = kvs::ValueArray<float>( data );
+    m_xyz = kvs::ValueArray<float>( data );
 
     return true;
 }

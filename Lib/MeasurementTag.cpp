@@ -25,7 +25,14 @@ namespace bdml
 MeasurementTag::MeasurementTag():
     Tag("measurement")
 {
-    objectRef = "";
+    m_objectRef = "";
+}
+
+void MeasurementTag::print( std::ostream& os, const kvs::Indent& indent ) const
+{
+    os << indent << "Object ref.: " << m_objectRef << std::endl;
+    os << indent << "Line entity:" << std::endl;
+    m_line.print( os, indent.nextIndent() );
 }
 
 bool MeasurementTag::read( const Node* parent )
@@ -33,9 +40,9 @@ bool MeasurementTag::read( const Node* parent )
     if ( !Tag::read( parent ) ) { return false; }
 
     Tag objectRef_tag("objectRef");
-    if ( objectRef_tag.read( this->node() ) ) { objectRef = NodeValue<std::string>( objectRef_tag.node() ); }
+    if ( objectRef_tag.read( this->node() ) ) { m_objectRef = NodeValue<std::string>( objectRef_tag.node() ); }
 
-    if ( !line.read( this->node() ) ) { return false; }
+    if ( !m_line.read( this->node() ) ) { return false; }
 
     return true;
 }

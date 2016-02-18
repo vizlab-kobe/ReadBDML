@@ -17,6 +17,8 @@
 #include "Tag.h"
 #include "LineTag.h"
 #include <string>
+#include <iostream>
+#include <kvs/Indent>
 
 
 namespace kvs_ext
@@ -25,13 +27,24 @@ namespace kvs_ext
 namespace bdml
 {
 
-struct MeasurementTag : public Tag
+/*===========================================================================*/
+/**
+ *  @brief  Measurement tag class.
+ */
+/*===========================================================================*/
+class MeasurementTag : public Tag
 {
-    std::string objectRef;
-    LineTag line;
+private:
+    std::string m_objectRef; ///< reference to the object
+    LineTag m_line; ///< line entity
 
+public:
     MeasurementTag();
 
+    const std::string& objectRef() const { return m_objectRef; }
+    const LineTag& line() const { return m_line; }
+
+    void print( std::ostream& os, const kvs::Indent& indent = kvs::Indent(0) ) const;
     bool read( const Node* parent );
 };
 
