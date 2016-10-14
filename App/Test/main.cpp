@@ -1,8 +1,5 @@
 #include <kvs/glut/Application>
 #include <kvs/glut/Screen>
-#include <kvs/LineObject>
-#include <kvs/PointObject>
-#include <kvs/LineRenderer>
 #include <ReadBDML/Lib/Importer.h>
 
 
