@@ -43,6 +43,8 @@ public:
     Node* node() { return m_node; }
     const Node* node() const { return m_node; }
     bool read( const Node* parent );
+    bool exists( const Node* parent ) const;
+    bool exists() const;
 
 private:
     Tag();

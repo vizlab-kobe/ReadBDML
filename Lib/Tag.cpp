@@ -39,6 +39,16 @@ bool Tag::read( const Node* parent )
     return m_node != NULL;
 }
 
+bool Tag::exists( const Node* parent ) const
+{
+    return FindNode( parent, m_name ) != NULL;
+}
+
+bool Tag::exists() const
+{
+    return m_node != NULL;
+}
+
 } // end of namespace bdml
 
 } // end of namespace ReadBDML

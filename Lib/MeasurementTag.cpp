@@ -31,8 +31,18 @@ MeasurementTag::MeasurementTag():
 void MeasurementTag::print( std::ostream& os, const kvs::Indent& indent ) const
 {
     os << indent << "Object ref.: " << m_objectRef << std::endl;
-    os << indent << "Line entity:" << std::endl;
-    m_line.print( os, indent.nextIndent() );
+
+    if ( m_line.exists() )
+    {
+        os << indent << "Line entity:" << std::endl;
+        m_line.print( os, indent.nextIndent() );
+    }
+
+    if ( m_property.exists() )
+    {
+        os << indent << "Property:" << std::endl;
+        m_property.print( os, indent.nextIndent() );
+    }
 }
 
 bool MeasurementTag::read( const Node* parent )
@@ -42,7 +52,8 @@ bool MeasurementTag::read( const Node* parent )
     Tag objectRef_tag("objectRef");
     if ( objectRef_tag.read( this->node() ) ) { m_objectRef = NodeValue<std::string>( objectRef_tag.node() ); }
 
-    if ( !m_line.read( this->node() ) ) { return false; }
+    if ( m_line.exists( this->node() ) ) { if ( !m_line.read( this->node() ) ) { return false; } }
+    if ( m_property.exists( this->node() ) ) { if ( !m_property.read( this->node() ) ) { return false; } }
 
     return true;
 }
