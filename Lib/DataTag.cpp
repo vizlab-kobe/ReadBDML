@@ -61,7 +61,8 @@ bool DataTag::read( const Node* parent )
         ComponentTag tag;
         tag.read( this_node );
         m_components.push_back( tag );
-        this_node = this->node()->IterateChildren( tag.name(), this_node );
+//        this_node = this->node()->IterateChildren( tag.name(), this_node );
+        this_node = this_node->NextSibling( tag.name() );
     }
 
     return true;

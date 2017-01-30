@@ -47,7 +47,8 @@ bool LineTag::read( const Node* parent )
         XYZSequenceTag tag;
         tag.read( this_node );
         m_xyzSequences.push_back( tag );
-        this_node = this->node()->IterateChildren( tag.name(), this_node );
+//        this_node = this->node()->IterateChildren( tag.name(), this_node );
+        this_node = this_node->NextSibling( tag.name() );
     }
 
     return true;

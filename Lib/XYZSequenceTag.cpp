@@ -40,13 +40,14 @@ bool XYZSequenceTag::read( const Node* node )
 
     XYZTag tag;
     Node* this_node = FindNode( node, tag.name() );
-    while ( this_node )
+    while ( this_node != NULL )
     {
         tag.read( this_node );
         data.push_back( tag.x );
         data.push_back( tag.y );
         data.push_back( tag.z );
-        this_node = this->node()->IterateChildren( tag.name(), this_node );
+//        this_node = this->node()->IterateChildren( tag.name(), this_node );
+        this_node = this_node->NextSibling( tag.name() );
     }
 
     m_xyz = kvs::ValueArray<float>( data );

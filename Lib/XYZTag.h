@@ -14,6 +14,8 @@
 /*****************************************************************************/
 #pragma once
 
+#include <iostream>
+#include <kvs/Indent>
 #include "Tag.h"
 
 
@@ -36,6 +38,7 @@ struct XYZTag : public Tag
 
     XYZTag();
 
+    void print( std::ostream& os, const kvs::Indent& indent = kvs::Indent(0) ) const;
     bool read( const Node* node );
 };
 

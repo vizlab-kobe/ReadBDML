@@ -29,6 +29,13 @@ XYZTag::XYZTag() : Tag("xyz")
     z = 0.0f;
 }
 
+void XYZTag::print( std::ostream& os, const kvs::Indent& indent ) const
+{
+    os << indent << "x: " << x << std::endl;
+    os << indent << "y: " << y << std::endl;
+    os << indent << "z: " << z << std::endl;
+}
+
 bool XYZTag::read( const Node* node )
 {
     if ( !node ) { return false; }
